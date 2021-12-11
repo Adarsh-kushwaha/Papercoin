@@ -1,15 +1,18 @@
 import React from 'react'
-import { Line, Chart } from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
 import { Col, Row, Typography } from "antd";
+import {
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
 
-
-
-
-const { Title } = Typography;
+} from "chart.js";
 
 const Linechart = ({ coinHistory, currentPrice, coinName }) => {
 
-    
+    const { Title } = Typography;
     const coinPrice = [];
     const coinTimestamp = [];
 
@@ -21,46 +24,46 @@ const Linechart = ({ coinHistory, currentPrice, coinName }) => {
         coinTimestamp.push(new Date(coinHistory?.data?.history[i].timestamp).toLocaleDateString());
     }
 
-    // const data = {
-    //     labels: coinTimestamp,
-    //     datasets: [
-    //         {
-    //             label: 'Price In USD',
-    //             data: coinPrice,
-    //             fill: false,
-    //             backgroundColor: '#0071bd',
-    //             borderColor: '#0071bd',
-    //         },
-    //     ],
-    // };
+    const data = {
+        labels: coinTimestamp,
+        datasets: [
+            {
+                label: 'Price In USD',
+                data: coinPrice,
+                fill: false,
+                backgroundColor: '#0071bd',
+                borderColor: '#0071bd'
+            },
+        ],
+    };
 
-    // const options = {
-    //     scales: {
-    //         yAxes : [
-    //             {
-    //                 ticks: {
-    //                     beginAtZero: true,
-    //                 },
-                   
-    //             },
-    //         ],
-    //     },
-    // };
+    const options = {
+        scales: {
+            yAxes: [
+                {
+                    ticks: {
+                        beginAtZero: true,
+                    },
 
-    
+                },
+            ],
+        },
+    };
+
+    ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement)
 
   
 
     return (
         <>
             <Row className='chart-header'>
-                <Title className='chart-title'>{coinName} Price Chart</Title>
+                <Title className='chart-title' level={3}>{coinName} Price Chart</Title>
                 <Col className='price-container'>
                     <Title level={5} className='price-change'>{coinHistory?.data?.change}%</Title>
                     <Title level={5} className='current-price'>Current {coinName} Price: $ {currentPrice}</Title>
                 </Col>
             </Row>
-            {/* <Line/> */}
+            <Line options={options} data={data} />
         </>
     )
 }
