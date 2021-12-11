@@ -33,7 +33,7 @@ const Homepage = () => {
                     <Title className='home-title' level={2}>Latest Cryptonews</Title>
                     <Title level={5} className='home-title'><Link to='/news' style={{ fontWeight:"400", color: "#A6ADB4", backgroundColor: "#001529", padding: "7px 14px", borderRadius: "5px" }}>Show All</Link></Title>
                 </div>
-                <News/>
+                <News simplified/>
                 
             </div>
         </>

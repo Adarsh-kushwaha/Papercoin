@@ -162,8 +162,8 @@ a:hover{
 }
 
 .coin-heading-container .coin-name{
-    font-weight: 900;
-    color: var(--pink);
+    font-weight: 700;
+    color: var(--text-primary);
 }
 
 .coin-heading-container p{
@@ -189,7 +189,7 @@ a:hover{
 .coin-details-heading{
     font-weight: 700 !important;
     margin-top: 20px !important;
-    color: var(--pink) !important;
+    color: rgb(90, 90, 90) !important;
 }
 
 .coin-stats{
