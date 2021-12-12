@@ -6,7 +6,7 @@ import { DollarCircleOutlined, TrophyOutlined, NumberOutlined, ThunderboltOutlin
 import { useGetCryptoDetailsQuery } from '../services/CryptoAPI';
 import Linechart from './Linechart';
 import { useGetCryptoHistoryQuery } from '../services/CryptoAPI';
-// import Loader from './Loader';
+import Loader from './Loader';
 
 
 const { Title, Text } = Typography;
@@ -18,10 +18,10 @@ const Cryptodetail = () => {
     const { data, isFetching } = useGetCryptoDetailsQuery(coinId);
     const { data: coinHistory } = useGetCryptoHistoryQuery({ coinId, timeperiod })
     const cryptoDetails = data?.data?.coin;
-    
+
 
     if (isFetching) {
-        return <div>Loading..</div>
+        return <Loader/>;
     }
 
     const time = ['3h', '24h', '7d', '30d', '1y', '5y'];
@@ -33,15 +33,6 @@ const Cryptodetail = () => {
         { title: 'Market Cap', value: `$ ${cryptoDetails.marketCap && millify(cryptoDetails.marketCap)}`, icon: <DollarCircleOutlined /> },
         { title: 'All-time-high(daily avg.)', value: `$ ${millify(cryptoDetails.allTimeHigh.price)}`, icon: <TrophyOutlined /> },
     ];
-
-    // const genericStats = [
-    //     { title: 'Number Of Markets', value: cryptoDetails.numberOfMarkets, icon: <FundOutlined /> },
-    //     { title: 'Number Of Exchanges', value: cryptoDetails.numberOfExchanges, icon: <MoneyCollectOutlined /> },
-    //     { title: 'Aprroved Supply', value: cryptoDetails.approvedSupply ? <CheckOutlined /> : <StopOutlined />, icon: <ExclamationCircleOutlined /> },
-    //     { title: 'Total Supply', value: `$ ${millify(cryptoDetails.totalSupply)}`, icon: <ExclamationCircleOutlined /> },
-    //     { title: 'Circulating Supply', value: `$ ${millify(cryptoDetails.circulatingSupply)}`, icon: <ExclamationCircleOutlined /> },
-    // ];
-
 
     return (
         <>
